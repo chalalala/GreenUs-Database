@@ -1,3 +1,6 @@
+#
+# DUMP FILE
+#
 # Database is ported from MS Access
 #------------------------------------------------------------------
 # Created using "MS Access to MySQL" form http://www.bullzip.com
@@ -305,7 +308,17 @@ SET autocommit=1;
 # Dumping data for table 'user_info'
 #
 
-# 0 records
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (1, 'annabedecs', 'Anna', 'Bedecs', 'annabedecs@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (2, 'antoniosol', 'Antonio', 'Solsona', 'antoniosolsona@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (3, 'thomasaxen', 'Thomas', 'Axen', 'thomasaxen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (4, 'christinalee', 'Christina', 'Lee', 'chirstinialee@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (5, 'martinodonell', 'Martin', 'O’Donnell', 'martinodonell@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (6, 'perezolaeta', 'Francisco', 'Pérez-Olaeta', 'perezolaeta@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (7, 'xiemingyang', 'Ming-Yang', 'Xie', 'xiemingyang@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (8, 'elizandersen', 'Elizabeth', 'Andersen', 'elizandersen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (9, 'svenmortensen', 'Sven', 'Mortensen', 'svenmortensen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (10, 'rolandwacker', 'Roland', 'Wacker', 'rolandwacker@gmail.com');
+# 10 records
 
 #
 # Table structure for table 'user_plants'
@@ -328,5 +341,70 @@ SET autocommit=1;
 # Dumping data for table 'user_plants'
 #
 
-# 0 records
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Abelia', 1);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'African Lily', 2);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Agastache', 3);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Aloe Vera', 4);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Anemone', 5);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Apple', 6);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Apricot', 7);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Bearded iris', 8);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Beech', 9);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Beetroot', 10);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Blackberries', 11);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Blueberries', 12);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Box', 13);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Cabbage', 14);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Carrots', 15);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Cauliflower', 16);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Cherries', 17);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Chilli pepper', 18);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Cucumbers', 19);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Dill', 20);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Flowering Maple', 21);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Garlic', 22);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Grapes', 23);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Green Bean', 24);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Hybrid tea roses', 25);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Jasmine', 26);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Kiwi', 27);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Knight\'s Star Lily', 28);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Lavender', 29);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Lemon', 30);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Lemongrass', 31);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Lettuce', 32);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Lilacs', 33);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Luffa', 34);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Maple', 35);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Mint', 36);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Onion', 37);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Ornamental Onion', 38);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Peaches', 39);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Pears', 40);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Peppers', 41);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Peruvian Lilies', 42);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Pinks', 43);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Plum', 44);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Potato', 45);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Pumpkins', 46);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Raspberries', 47);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Rugosa Rose', 48);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Soybean', 49);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Spinach', 50);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Strawberry', 51);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Sunflower', 52);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Sweet corn', 53);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Thyme', 54);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Tomatoes', 55);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Tulip', 56);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Violet', 57);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Watermelon', 58);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Yarrow', 59);
+# 59 records
 
+alter table `user_plants` add constraint userid foreign key (`UID`) references user_info(`UID`);
+alter table `user_plants` add constraint plantid foreign key (`plant_id`) references plant_info(`ID`);
+
+alter table `plant_other_names` add constraint otherid foreign key (`plant_id`) references plant_info(`ID`);
+
+alter table `plant_instructions` add constraint ins_id foreign key (`id`) references plant_info(`ID`);
