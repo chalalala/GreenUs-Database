@@ -1,6 +1,3 @@
-#
-# DUMP FILE
-#
 # Database is ported from MS Access
 #------------------------------------------------------------------
 # Created using "MS Access to MySQL" form http://www.bullzip.com
@@ -39,7 +36,7 @@ USE `greenus`;
 DROP TABLE IF EXISTS `plant_info`;
 
 CREATE TABLE `plant_info` (
-  `ID` INTEGER NOT NULL DEFAULT 0 AUTO_INCREMENT, 
+  `ID` INT(11) NOT NULL AUTO_INCREMENT, 
   `common_name` VARCHAR(255), 
   `plant_types` VARCHAR(255), 
   `difficulty` VARCHAR(255), 
@@ -105,7 +102,7 @@ INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `pla
 INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (48, 'Rugosa Rose', 'Shrub', 'Easy', 'Spring', 'Each color offers a distinct meaning: red, the lover\'s rose, signifies enduring passion; white, humility and innocence; yellow, expressing friendship and joy; pink, gratitude, appreciation and admiration; orange, enthusiasm and desire; white lilac and purple roses represent enchantment and love at first sight.', 'https://www.thespruce.com/thmb/O02u0Y15gdSwLZZruY9oxP8lIJg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/rugosa-roses--rosa-rugosa---close-up-73898809-5b1d399fba617700378d3520.jpg');
 INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (49, 'Soybean', 'Herb/Forb', 'Easy', 'Early Summer', 'N/A', 'https://www.rhs.org.uk/getmedia/8867082f-868a-40dc-b0c3-7605392a0a74/Glycine-max-(soya-bean)-pod_PUB0013431.jpg?width=556&height=313');
 INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (50, 'Spinach', 'Herb/Forb', 'Easy', 'Spring', 'Fresh spinach could mean that you need something new in your life to give it some interest, fun or excitement. Spinach can also be a good omen, reinforcing the general health and happiness you feel at present', 'https://www.rhs.org.uk/getmedia/743086ee-1ff9-448f-bf4c-69f911765cfa/spinach-Emilia3x2.jpg?width=940&height=627&ext=.jpg');
-INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (51, 'Strawberry', 'Herb/Forb', 'Easy', 'Late spring, early summer', 'The strawberry plant is the symbol of perfect righteousness because the man by his work brings excellent fruits. The strawberry is also the symbol of excellence thanks to its fragrance and subtle taste. When the strawberry plant is accompanied by the violet, it represents pure spirits. 🍓 The strawberry is considered a delicious and refined fruit par excellence, a treat for children! So it symbolizes the real \"delight\". Its discovery or its presence in dreams symbolizes a \"reward\", a deserved sweetness after the effort or even access to pleasure. The strawberry is therefore this reward, the fruit of labor or a quest', 'https://garden.org/pics/2015-07-26/gardengus/056953.jpg');
+INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (51, 'Strawberry', 'Herb/Forb', 'Easy', 'Late spring, early summer', 'The strawberry plant is the symbol of perfect righteousness because the man by his work brings excellent fruits. The strawberry is also the symbol of excellence thanks to its fragrance and subtle taste. When the strawberry plant is accompanied by the violet, it represents pure spirits. The strawberry is considered a delicious and refined fruit par excellence, a treat for children! So it symbolizes the real delight. Its discovery or its presence in dreams symbolizes a reward, a deserved sweetness after the effort or even access to pleasure. The strawberry is therefore this reward, the fruit of labor or a quest', 'https://garden.org/pics/2015-07-26/gardengus/056953.jpg');
 INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (52, 'Sunflower', 'Herb', 'Easy', 'Spring (Mainly sown from mid-April to the end of May)', 'Sunflowers symbolize adoration, loyalty and longevity. Sunflowers are also known for being “happy” flowers, making them the perfect gift to bring joy to someone\'s (or your) day.', 'https://www.almanac.com/sites/default/files/image_nodes/sunflower-1627193_1920.jpg');
 INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (53, 'Sweet corn', 'Grass', 'Easy', 'All year round', 'In the Bible, the word “corn” is used for grains, in general, and is used symbolically to indicate spiritual goodness. With its many seeds, corn is also a symbol of fertility and rebirth. In Vietnam, it symbolizes the perfection.', 'https://www.gardenclinic.com.au/images/how-to-grow/sweet%20corn%20shutterstock_88410883.jpg');
 INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `plant_time`, `symbol`, `image_url`) VALUES (54, 'Thyme', 'Herb', 'Easy', 'Late Spring to Summer', 'According to the modern language of herbs, thyme brings with it the meaning of affection, which is perfect for either young love or deep friendship. What better way to express your devotion to someone than to include a sprig of thyme in a bouquet', 'https://www.rhs.org.uk/getmedia/dfb1caff-4da9-4fa7-b234-5664bc69abf5/thyme-556x313.jpg?width=556&height=313');
@@ -123,14 +120,19 @@ INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `pla
 DROP TABLE IF EXISTS `plant_instructions`;
 
 CREATE TABLE `plant_instructions` (
-  `ID` INTEGER NOT NULL DEFAULT 0 AUTO_INCREMENT, 
+  `ID` INT(11) NOT NULL AUTO_INCREMENT, 
   `planting` LONGTEXT, 
   `watering` LONGTEXT, 
   `sun_req` VARCHAR(255), 
   `pruning_training` LONGTEXT, 
   `propagating` LONGTEXT, 
   `problems` LONGTEXT, 
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `ins_id`
+    FOREIGN KEY (`ID`)
+    REFERENCES `plant_info`(`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 ) ENGINE=myisam DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
@@ -207,10 +209,15 @@ INSERT INTO `plant_instructions` (`ID`, `planting`, `watering`, `sun_req`, `prun
 DROP TABLE IF EXISTS `plant_other_names`;
 
 CREATE TABLE `plant_other_names` (
-  `ID` INTEGER NOT NULL DEFAULT 0, 
+  `plant_id` INTEGER NOT NULL DEFAULT 0, 
   `other_name` VARCHAR(255) NOT NULL, 
-  INDEX (`ID`), 
-  PRIMARY KEY (`ID`, `other_name`)
+  INDEX (`plant_id`), 
+  PRIMARY KEY (`plant_id`, `other_name`),
+  CONSTRAINT `otherid`
+    FOREIGN KEY (`plant_id`)
+    REFERENCES `plant_info` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 ) ENGINE=myisam DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
@@ -219,72 +226,72 @@ SET autocommit=1;
 # Dumping data for table 'plant_other_names'
 #
 
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (30, 'Citrus x limon');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (31, 'Cymbopogon citratus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (32, 'Lactuca sativa');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (33, 'Syringa');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (34, 'Loofa or Loofah');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (35, 'Acer');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (36, 'Mentha genus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (37, 'Allium cepa');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (38, 'Allium');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (39, 'Prunus persica');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (40, 'Pyrus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (41, 'Capsicum');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (42, 'Alstroemeria');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (43, 'Dianthus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (44, 'Prunus umbellata');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (45, 'Solanum tuberosum');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (46, 'Curcurbita pepo');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (47, 'Rubus idaeus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (48, 'Rosa rugosa');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (49, 'Glycine max');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (50, 'Spinacia oleracea');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (51, 'Fragaria x ananassa');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (52, 'Helianthus annuus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (53, 'Zea mays');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (54, 'Thymus vulgaris');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (55, 'Solanum lycopersicum');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (56, 'Tulipa');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (57, 'Violaceae');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (58, 'Citrillus lunatus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (59, 'Achillea millefolium');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (3, 'giant hyssop');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (1, 'N/A');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (2, 'Agapanthus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (3, 'anise hyssop');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (4, 'N/A');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (5, 'Easter Flower');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (6, 'Malus domestica');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (7, 'Prunus armeniaca');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (8, 'Iris germanica');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (9, 'Fagus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (10, 'Beta vulgaris');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (11, 'Rubus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (12, 'Vaccinium');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (13, 'Buxus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (14, 'Brassica oleracea');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (15, 'Daucus carota');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (16, 'Brassica oleracea');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (17, 'Prunus avium');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (18, 'Capsicum annuum');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (19, 'Cucumis sativus');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (20, 'Anethum graveolens');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (21, 'Abutilon');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (22, 'Allium sativum');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (23, 'Vitis');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (24, 'Phaseolus vulgaris');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (25, 'Rosa x hybrida');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (26, 'Jasminum');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (27, 'Actinidia');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (28, 'Amaryllis, Hippeastrum');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (29, 'Lavandula');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (3, 'Korean mint');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (5, 'Pasque Flower');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (5, 'Windflower');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (5, 'Thimbleweed');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (21, 'Indian Mallow');
-INSERT INTO `plant_other_names` (`ID`, `other_name`) VALUES (21, 'Chinese Lantern');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (30, 'Citrus x limon');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (31, 'Cymbopogon citratus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (32, 'Lactuca sativa');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (33, 'Syringa');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (34, 'Loofa or Loofah');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (35, 'Acer');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (36, 'Mentha genus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (37, 'Allium cepa');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (38, 'Allium');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (39, 'Prunus persica');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (40, 'Pyrus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (41, 'Capsicum');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (42, 'Alstroemeria');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (43, 'Dianthus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (44, 'Prunus umbellata');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (45, 'Solanum tuberosum');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (46, 'Curcurbita pepo');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (47, 'Rubus plant_idaeus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (48, 'Rosa rugosa');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (49, 'Glycine max');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (50, 'Spinacia oleracea');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (51, 'Fragaria x ananassa');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (52, 'Helianthus annuus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (53, 'Zea mays');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (54, 'Thymus vulgaris');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (55, 'Solanum lycopersicum');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (56, 'Tulipa');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (57, 'Violaceae');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (58, 'Citrillus lunatus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (59, 'Achillea millefolium');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (3, 'giant hyssop');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (1, 'N/A');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (2, 'Agapanthus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (3, 'anise hyssop');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (4, 'N/A');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (5, 'Easter Flower');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (6, 'Malus domestica');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (7, 'Prunus armeniaca');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (8, 'Iris germanica');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (9, 'Fagus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (10, 'Beta vulgaris');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (11, 'Rubus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (12, 'Vaccinium');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (13, 'Buxus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (14, 'Brassica oleracea');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (15, 'Daucus carota');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (16, 'Brassica oleracea');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (17, 'Prunus avium');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (18, 'Capsicum annuum');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (19, 'Cucumis sativus');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (20, 'Anethum graveolens');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (21, 'Abutilon');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (22, 'Allium sativum');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (23, 'Vitis');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (24, 'Phaseolus vulgaris');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (25, 'Rosa x hybrplant_ida');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (26, 'Jasminum');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (27, 'Actinplant_idia');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (28, 'Amaryllis, Hippeastrum');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (29, 'Lavandula');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (3, 'Korean mint');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (5, 'Pasque Flower');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (5, 'Windflower');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (5, 'Thimbleweed');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (21, 'Indian Mallow');
+INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (21, 'Chinese Lantern');
 # 66 records
 
 #
@@ -308,17 +315,7 @@ SET autocommit=1;
 # Dumping data for table 'user_info'
 #
 
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (1, 'annabedecs', 'Anna', 'Bedecs', 'annabedecs@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (2, 'antoniosol', 'Antonio', 'Solsona', 'antoniosolsona@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (3, 'thomasaxen', 'Thomas', 'Axen', 'thomasaxen@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (4, 'christinalee', 'Christina', 'Lee', 'chirstinialee@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (5, 'martinodonell', 'Martin', 'O’Donnell', 'martinodonell@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (6, 'perezolaeta', 'Francisco', 'Pérez-Olaeta', 'perezolaeta@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (7, 'xiemingyang', 'Ming-Yang', 'Xie', 'xiemingyang@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (8, 'elizandersen', 'Elizabeth', 'Andersen', 'elizandersen@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (9, 'svenmortensen', 'Sven', 'Mortensen', 'svenmortensen@gmail.com');
-INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (10, 'rolandwacker', 'Roland', 'Wacker', 'rolandwacker@gmail.com');
-# 10 records
+# 0 records
 
 #
 # Table structure for table 'user_plants'
@@ -332,7 +329,17 @@ CREATE TABLE `user_plants` (
   `plant_id` INTEGER DEFAULT 0, 
   INDEX (`plant_id`), 
   PRIMARY KEY (`name`), 
-  INDEX (`UID`)
+  INDEX (`UID`),
+  CONSTRAINT `userid`
+    FOREIGN KEY (`UID`)
+    REFERENCES `user_info` (`UID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `plantid`
+    FOREIGN KEY (`plant_id`)
+    REFERENCES `plant_info` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 ) ENGINE=myisam DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
@@ -401,10 +408,3 @@ INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Violet', 57);
 INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Watermelon', 58);
 INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Yarrow', 59);
 # 59 records
-
-alter table `user_plants` add constraint userid foreign key (`UID`) references user_info(`UID`);
-alter table `user_plants` add constraint plantid foreign key (`plant_id`) references plant_info(`ID`);
-
-alter table `plant_other_names` add constraint otherid foreign key (`plant_id`) references plant_info(`ID`);
-
-alter table `plant_instructions` add constraint ins_id foreign key (`id`) references plant_info(`ID`);
