@@ -1,41 +1,14 @@
-# Database is ported from MS Access
-#------------------------------------------------------------------
-# Created using "MS Access to MySQL" form http://www.bullzip.com
-# Program Version 5.5.282
-#
-# OPTIONS:
-#   sourcefilename=C:/Users/T450s/Downloads/GreenUs.accdb
-#   sourceusername=
-#   sourcepassword=
-#   sourcesystemdatabase=
-#   destinationdatabase=greenus
-#   storageengine=MyISAM
-#   dropdatabase=0
-#   createtables=1
-#   unicode=1
-#   autocommit=1
-#   transferdefaultvalues=1
-#   transferindexes=1
-#   transferautonumbers=1
-#   transferrecords=1
-#   columnlist=1
-#   tableprefix=
-#   negativeboolean=0
-#   ignorelargeblobs=0
-#   memotype=LONGTEXT
-#   datetimetype=DATETIME
-#
-
-CREATE DATABASE IF NOT EXISTS `greenus`;
-USE `greenus`;
+DROP SCHEMA IF EXISTS `greenus` ;
+CREATE SCHEMA IF NOT EXISTS `greenus` DEFAULT CHARACTER SET latin1 ;
+USE `greenus` ;
 
 #
 # Table structure for table 'plant_info'
 #
 
-DROP TABLE IF EXISTS `plant_info`;
+DROP TABLE IF EXISTS `greenus`.`plant_info`;
 
-CREATE TABLE `plant_info` (
+CREATE TABLE IF NOT EXISTS `greenus`.`plant_info` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT, 
   `common_name` VARCHAR(255), 
   `plant_types` VARCHAR(255), 
@@ -44,7 +17,7 @@ CREATE TABLE `plant_info` (
   `symbol` LONGTEXT, 
   `image_url` VARCHAR(255), 
   PRIMARY KEY (`ID`)
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -117,9 +90,9 @@ INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `pla
 # Table structure for table 'plant_instructions'
 #
 
-DROP TABLE IF EXISTS `plant_instructions`;
+DROP TABLE IF EXISTS `greenus`.`plant_instructions`;
 
-CREATE TABLE `plant_instructions` (
+CREATE TABLE IF NOT EXISTS `greenus`.`plant_instructions` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT, 
   `planting` LONGTEXT, 
   `watering` LONGTEXT, 
@@ -130,10 +103,10 @@ CREATE TABLE `plant_instructions` (
   PRIMARY KEY (`ID`),
   CONSTRAINT `ins_id`
     FOREIGN KEY (`ID`)
-    REFERENCES `plant_info`(`ID`)
+    REFERENCES `greenus`. `plant_info` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -206,19 +179,19 @@ INSERT INTO `plant_instructions` (`ID`, `planting`, `watering`, `sun_req`, `prun
 # Table structure for table 'plant_other_names'
 #
 
-DROP TABLE IF EXISTS `plant_other_names`;
+DROP TABLE IF EXISTS `greenus`.`plant_other_names`;
 
-CREATE TABLE `plant_other_names` (
+CREATE TABLE IF NOT EXISTS `greenus`.`plant_other_names` (
   `plant_id` INTEGER NOT NULL DEFAULT 0, 
   `other_name` VARCHAR(255) NOT NULL, 
   INDEX (`plant_id`), 
   PRIMARY KEY (`plant_id`, `other_name`),
   CONSTRAINT `otherid`
     FOREIGN KEY (`plant_id`)
-    REFERENCES `plant_info` (`ID`)
+    REFERENCES `greenus`. `plant_info` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -298,16 +271,16 @@ INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (21, 'Chinese 
 # Table structure for table 'user_info'
 #
 
-DROP TABLE IF EXISTS `user_info`;
+DROP TABLE IF EXISTS `greenus`.`user_info`;
 
-CREATE TABLE `user_info` (
+CREATE TABLE IF NOT EXISTS `greenus`.`user_info` (
   `UID` INTEGER NOT NULL DEFAULT 0, 
   `acc` VARCHAR(255), 
   `first_name` VARCHAR(255), 
   `last_name` VARCHAR(255), 
   `email` VARCHAR(255), 
   PRIMARY KEY (`UID`)
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -315,15 +288,25 @@ SET autocommit=1;
 # Dumping data for table 'user_info'
 #
 
-# 0 records
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (1, 'annabedecs', 'Anna', 'Bedecs', 'annabedecs@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (2, 'antoniosol', 'Antonio', 'Solsona', 'antoniosolsona@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (3, 'thomasaxen', 'Thomas', 'Axen', 'thomasaxen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (4, 'christinalee', 'Christina', 'Lee', 'chirstinialee@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (5, 'martinodonell', 'Martin', 'O’Donnell', 'martinodonell@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (6, 'perezolaeta', 'Francisco', 'Pérez-Olaeta', 'perezolaeta@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (7, 'xiemingyang', 'Ming-Yang', 'Xie', 'xiemingyang@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (8, 'elizandersen', 'Elizabeth', 'Andersen', 'elizandersen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (9, 'svenmortensen', 'Sven', 'Mortensen', 'svenmortensen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (10, 'rolandwacker', 'Roland', 'Wacker', 'rolandwacker@gmail.com');
+# 10 records
 
 #
 # Table structure for table 'user_plants'
 #
 
-DROP TABLE IF EXISTS `user_plants`;
+DROP TABLE IF EXISTS `greenus`.`user_plants`;
 
-CREATE TABLE `user_plants` (
+CREATE TABLE IF NOT EXISTS `greenus`.`user_plants` (
   `UID` INTEGER DEFAULT 0, 
   `name` VARCHAR(255) NOT NULL, 
   `plant_id` INTEGER DEFAULT 0, 
@@ -332,15 +315,15 @@ CREATE TABLE `user_plants` (
   INDEX (`UID`),
   CONSTRAINT `userid`
     FOREIGN KEY (`UID`)
-    REFERENCES `user_info` (`UID`)
+    REFERENCES `greenus`. `user_info` (`UID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `plantid`
     FOREIGN KEY (`plant_id`)
-    REFERENCES `plant_info` (`ID`)
+    REFERENCES `greenus`. `plant_info` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
