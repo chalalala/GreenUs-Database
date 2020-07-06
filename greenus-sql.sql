@@ -1,41 +1,14 @@
-# Database is ported from MS Access
-#------------------------------------------------------------------
-# Created using "MS Access to MySQL" form http://www.bullzip.com
-# Program Version 5.5.282
-#
-# OPTIONS:
-#   sourcefilename=C:/Users/T450s/Downloads/GreenUs.accdb
-#   sourceusername=
-#   sourcepassword=
-#   sourcesystemdatabase=
-#   destinationdatabase=greenus
-#   storageengine=MyISAM
-#   dropdatabase=0
-#   createtables=1
-#   unicode=1
-#   autocommit=1
-#   transferdefaultvalues=1
-#   transferindexes=1
-#   transferautonumbers=1
-#   transferrecords=1
-#   columnlist=1
-#   tableprefix=
-#   negativeboolean=0
-#   ignorelargeblobs=0
-#   memotype=LONGTEXT
-#   datetimetype=DATETIME
-#
-
-CREATE DATABASE IF NOT EXISTS `greenus`;
-USE `greenus`;
+DROP SCHEMA IF EXISTS `greenus` ;
+CREATE SCHEMA IF NOT EXISTS `greenus` DEFAULT CHARACTER SET latin1 ;
+USE `greenus` ;
 
 #
 # Table structure for table 'plant_info'
 #
 
-DROP TABLE IF EXISTS `plant_info`;
+DROP TABLE IF EXISTS `greenus`.`plant_info`;
 
-CREATE TABLE `plant_info` (
+CREATE TABLE IF NOT EXISTS `greenus`.`plant_info` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT, 
   `common_name` VARCHAR(255), 
   `plant_types` VARCHAR(255), 
@@ -44,7 +17,7 @@ CREATE TABLE `plant_info` (
   `symbol` LONGTEXT, 
   `image_url` VARCHAR(255), 
   PRIMARY KEY (`ID`)
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -117,9 +90,9 @@ INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `pla
 # Table structure for table 'plant_instructions'
 #
 
-DROP TABLE IF EXISTS `plant_instructions`;
+DROP TABLE IF EXISTS `greenus`.`plant_instructions`;
 
-CREATE TABLE `plant_instructions` (
+CREATE TABLE IF NOT EXISTS `greenus`.`plant_instructions` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT, 
   `planting` LONGTEXT, 
   `watering` LONGTEXT, 
@@ -127,8 +100,13 @@ CREATE TABLE `plant_instructions` (
   `pruning_training` LONGTEXT, 
   `propagating` LONGTEXT, 
   `problems` LONGTEXT, 
-  PRIMARY KEY (`ID`)
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `ins_id`
+    FOREIGN KEY (`ID`)
+    REFERENCES `greenus`. `plant_info` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -201,14 +179,19 @@ INSERT INTO `plant_instructions` (`ID`, `planting`, `watering`, `sun_req`, `prun
 # Table structure for table 'plant_other_names'
 #
 
-DROP TABLE IF EXISTS `plant_other_names`;
+DROP TABLE IF EXISTS `greenus`.`plant_other_names`;
 
-CREATE TABLE `plant_other_names` (
+CREATE TABLE IF NOT EXISTS `greenus`.`plant_other_names` (
   `plant_id` INTEGER NOT NULL DEFAULT 0, 
   `other_name` VARCHAR(255) NOT NULL, 
   INDEX (`plant_id`), 
-  PRIMARY KEY (`plant_id`, `other_name`)
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`plant_id`, `other_name`),
+  CONSTRAINT `otherid`
+    FOREIGN KEY (`plant_id`)
+    REFERENCES `greenus`. `plant_info` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -288,16 +271,16 @@ INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (21, 'Chinese 
 # Table structure for table 'user_info'
 #
 
-DROP TABLE IF EXISTS `user_info`;
+DROP TABLE IF EXISTS `greenus`.`user_info`;
 
-CREATE TABLE `user_info` (
+CREATE TABLE IF NOT EXISTS `greenus`.`user_info` (
   `UID` INTEGER NOT NULL DEFAULT 0, 
   `acc` VARCHAR(255), 
   `first_name` VARCHAR(255), 
   `last_name` VARCHAR(255), 
   `email` VARCHAR(255), 
   PRIMARY KEY (`UID`)
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -305,22 +288,42 @@ SET autocommit=1;
 # Dumping data for table 'user_info'
 #
 
-# 0 records
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (1, 'annabedecs', 'Anna', 'Bedecs', 'annabedecs@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (2, 'antoniosol', 'Antonio', 'Solsona', 'antoniosolsona@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (3, 'thomasaxen', 'Thomas', 'Axen', 'thomasaxen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (4, 'christinalee', 'Christina', 'Lee', 'chirstinialee@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (5, 'martinodonell', 'Martin', 'O’Donnell', 'martinodonell@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (6, 'perezolaeta', 'Francisco', 'Pérez-Olaeta', 'perezolaeta@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (7, 'xiemingyang', 'Ming-Yang', 'Xie', 'xiemingyang@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (8, 'elizandersen', 'Elizabeth', 'Andersen', 'elizandersen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (9, 'svenmortensen', 'Sven', 'Mortensen', 'svenmortensen@gmail.com');
+INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUES (10, 'rolandwacker', 'Roland', 'Wacker', 'rolandwacker@gmail.com');
+# 10 records
 
 #
 # Table structure for table 'user_plants'
 #
 
-DROP TABLE IF EXISTS `user_plants`;
+DROP TABLE IF EXISTS `greenus`.`user_plants`;
 
-CREATE TABLE `user_plants` (
+CREATE TABLE IF NOT EXISTS `greenus`.`user_plants` (
   `UID` INTEGER DEFAULT 0, 
   `name` VARCHAR(255) NOT NULL, 
   `plant_id` INTEGER DEFAULT 0, 
   INDEX (`plant_id`), 
   PRIMARY KEY (`name`), 
-  INDEX (`UID`)
-) ENGINE=myisam DEFAULT CHARSET=utf8;
+  INDEX (`UID`),
+  CONSTRAINT `userid`
+    FOREIGN KEY (`UID`)
+    REFERENCES `greenus`. `user_info` (`UID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `plantid`
+    FOREIGN KEY (`plant_id`)
+    REFERENCES `greenus`. `plant_info` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -328,11 +331,63 @@ SET autocommit=1;
 # Dumping data for table 'user_plants'
 #
 
-# 0 records
-
-alter table `user_plants` add constraint userid foreign key (`UID`) references user_info(`UID`);
-alter table `user_plants` add constraint plantid foreign key (`plant_id`) references plant_info(`ID`);
-
-alter table `plant_other_names` add constraint otherid foreign key (`plant_id`) references plant_info(`ID`);
-
-alter table `plant_instructions` add constraint ins_id foreign key (`ID`) references plant_info(`ID`);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Abelia', 1);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'African Lily', 2);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Agastache', 3);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Aloe Vera', 4);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Anemone', 5);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Apple', 6);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (1, 'Apricot', 7);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Bearded iris', 8);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Beech', 9);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Beetroot', 10);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Blackberries', 11);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Blueberries', 12);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Box', 13);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Cabbage', 14);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Carrots', 15);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Cauliflower', 16);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Cherries', 17);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Chilli pepper', 18);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Cucumbers', 19);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Dill', 20);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Flowering Maple', 21);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Garlic', 22);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Grapes', 23);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Green Bean', 24);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Hybrid tea roses', 25);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Jasmine', 26);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Kiwi', 27);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Knight\'s Star Lily', 28);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Lavender', 29);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Lemon', 30);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Lemongrass', 31);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Lettuce', 32);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Lilacs', 33);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Luffa', 34);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Maple', 35);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Mint', 36);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Onion', 37);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Ornamental Onion', 38);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Peaches', 39);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Pears', 40);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Peppers', 41);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Peruvian Lilies', 42);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Pinks', 43);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Plum', 44);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Potato', 45);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Pumpkins', 46);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Raspberries', 47);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (2, 'Rugosa Rose', 48);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Soybean', 49);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Spinach', 50);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Strawberry', 51);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (6, 'Sunflower', 52);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (7, 'Sweet corn', 53);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (8, 'Thyme', 54);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (9, 'Tomatoes', 55);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (10, 'Tulip', 56);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (5, 'Violet', 57);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (3, 'Watermelon', 58);
+INSERT INTO `user_plants` (`UID`, `name`, `plant_id`) VALUES (4, 'Yarrow', 59);
+# 59 records
