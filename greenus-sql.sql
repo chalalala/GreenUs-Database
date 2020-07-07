@@ -9,15 +9,15 @@ USE `greenus` ;
 DROP TABLE IF EXISTS `greenus`.`plant_info`;
 
 CREATE TABLE IF NOT EXISTS `greenus`.`plant_info` (
-  `ID` INT(11) NOT NULL AUTO_INCREMENT, 
-  `common_name` VARCHAR(255), 
-  `plant_types` VARCHAR(255), 
-  `difficulty` VARCHAR(255), 
-  `plant_time` VARCHAR(255), 
-  `symbol` LONGTEXT, 
-  `image_url` VARCHAR(255), 
+  `ID` INT NOT NULL AUTO_INCREMENT, 
+  `common_name` VARCHAR(50), 
+  `plant_types` VARCHAR(50), 
+  `difficulty` VARCHAR(20), 
+  `plant_time` TEXT, 
+  `symbol` TEXT, 
+  `image_url` TINYTEXT, 
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -93,20 +93,20 @@ INSERT INTO `plant_info` (`ID`, `common_name`, `plant_types`, `difficulty`, `pla
 DROP TABLE IF EXISTS `greenus`.`plant_instructions`;
 
 CREATE TABLE IF NOT EXISTS `greenus`.`plant_instructions` (
-  `ID` INT(11) NOT NULL AUTO_INCREMENT, 
-  `planting` LONGTEXT, 
-  `watering` LONGTEXT, 
-  `sun_req` VARCHAR(255), 
-  `pruning_training` LONGTEXT, 
-  `propagating` LONGTEXT, 
-  `problems` LONGTEXT, 
+  `ID` INT NOT NULL AUTO_INCREMENT, 
+  `planting` TEXT, 
+  `watering` TEXT, 
+  `sun_req` TINYTEXT, 
+  `pruning_training` TEXT, 
+  `propagating` TEXT, 
+  `problems` TEXT, 
   PRIMARY KEY (`ID`),
   CONSTRAINT `ins_id`
     FOREIGN KEY (`ID`)
     REFERENCES `greenus`. `plant_info` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -182,8 +182,8 @@ INSERT INTO `plant_instructions` (`ID`, `planting`, `watering`, `sun_req`, `prun
 DROP TABLE IF EXISTS `greenus`.`plant_other_names`;
 
 CREATE TABLE IF NOT EXISTS `greenus`.`plant_other_names` (
-  `plant_id` INTEGER NOT NULL DEFAULT 0, 
-  `other_name` VARCHAR(255) NOT NULL, 
+  `plant_id` INT NOT NULL DEFAULT 0, 
+  `other_name` VARCHAR(50) NOT NULL, 
   INDEX (`plant_id`), 
   PRIMARY KEY (`plant_id`, `other_name`),
   CONSTRAINT `otherid`
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `greenus`.`plant_other_names` (
     REFERENCES `greenus`. `plant_info` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -274,13 +274,13 @@ INSERT INTO `plant_other_names` (`plant_id`, `other_name`) VALUES (21, 'Chinese 
 DROP TABLE IF EXISTS `greenus`.`user_info`;
 
 CREATE TABLE IF NOT EXISTS `greenus`.`user_info` (
-  `UID` INTEGER NOT NULL DEFAULT 0, 
-  `acc` VARCHAR(255), 
-  `first_name` VARCHAR(255), 
-  `last_name` VARCHAR(255), 
-  `email` VARCHAR(255), 
+  `UID` INT NOT NULL DEFAULT 0, 
+  `acc` VARCHAR(50), 
+  `first_name` VARCHAR(50), 
+  `last_name` VARCHAR(50), 
+  `email` VARCHAR(100), 
   PRIMARY KEY (`UID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
@@ -307,9 +307,9 @@ INSERT INTO `user_info` (`UID`, `acc`, `first_name`, `last_name`, `email`) VALUE
 DROP TABLE IF EXISTS `greenus`.`user_plants`;
 
 CREATE TABLE IF NOT EXISTS `greenus`.`user_plants` (
-  `UID` INTEGER DEFAULT 0, 
-  `name` VARCHAR(255) NOT NULL, 
-  `plant_id` INTEGER DEFAULT 0, 
+  `UID` INT DEFAULT 0, 
+  `name` VARCHAR(50) NOT NULL, 
+  `plant_id` INT DEFAULT 0, 
   INDEX (`plant_id`), 
   PRIMARY KEY (`name`), 
   INDEX (`UID`),
@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `greenus`.`user_plants` (
     REFERENCES `greenus`. `plant_info` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)DEFAULT CHARSET=utf8;
 
 SET autocommit=1;
 
